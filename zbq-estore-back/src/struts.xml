@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+	<package name="manager" extends="struts-default" namespace="/manager">
+		<action name="login" class="struts2.action.ManagerAction" method="login" >
+			<result name="success">/index.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<action name="logout" class="struts2.action.ManagerAction" method="logout">
+			<result name="success">/login.jsp</result>
+		</action>
+		<action name="showManagerList" class="struts2.action.ManagerAction" method="selectManager">
+			<result name="success">/manager/showManagerList.jsp</result>
+		</action>
+		<action name="deleteManager"  class="struts2.action.ManagerAction" method="deleteManager" >
+			<result name="success" type="chain" >showManagerList</result>
+		</action>
+		<action name="addManager" class="struts2.action.ManagerAction" method="addManager">
+			<result name="success" type="chain" >showManagerList</result>
+			<result name="error">/manager/addManager.jsp</result>
+		</action>
+		<action name="updatePassword" class="struts2.action.ManagerAction" method="updatePassword">
+			<result name="success">/login.jsp</result>
+		</action>
+	</package>
+	<package name="mainCategory"   extends="struts-default" namespace = "/mainCategory" >
+		<action name="showAllMainCategory" class="struts2.action.CategoryMainAction" method="showAllMainCategory">
+			<result name="success" >/mainCategory/showAllMainCategorys.jsp</result>
+		</action>
+		
+		
+		<action name="addProduct"  class="struts2.action.CategoryMainAction" method="showAllMainCategory" >
+			<result name="success">/product/addProduct.jsp</result>
+		</action>
+		
+		
+		<action name="insertMainCategory" class="struts2.action.CategoryMainAction" method="insertMainCategory">
+			<result name="success" type="chain">showAllMainCategory</result>
+			<result name="error">/mainCategory/addMainCategory.jsp</result>
+		</action>
+		<action name="updateMainCategory" class="struts2.action.CategoryMainAction" method="updateMainCategory" >
+			<result name="success" type="chain">showAllMainCategory</result>
+			<result name="error">/mainCategory/editMainCategory.jsp</result>
+		</action>
+		<action name="deleteMainCategory" class="struts2.action.CategoryMainAction" method="deleteMainCategory">
+			<result name="success" type="chain">showAllMainCategory</result>
+			<result name="error" type = "chain">showAllMainCategory</result>
+		</action>
+	</package>
+	<package name = "product" extends="struts-default" namespace="/product" >
+		<action name = "showAllProduct" class="struts2.action.ProductAction" method="selectAllProduct">
+			<result name="success" >/product/showAllProducts.jsp</result>
+		</action>
+		<action name="insertProduct" class="struts2.action.ProductAction" method="insertProduct" >
+			<result name="success" type="chain">showAllProduct</result>
+		</action>
+	</package>
+	<package name="json" extends="json-default" namespace="/branchCategoryjson">
+		<action name="selectBranchCategoryByMainIdForAjax" class="struts2.action.CategoryBranchAction"  method="selectBranchCategoryByMainIdForAjax">
+			<result type="json">
+				<param name="excludeNullProperties">true</param>
+				<param name="root">list</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>     
